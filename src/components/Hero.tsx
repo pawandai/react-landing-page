@@ -23,13 +23,12 @@ const Hero: FC<HeroProps> = ({ backgroundImage }) => {
   return (
     <div className="relative h-screen overflow-hidden" id="home">
       <div
-        className="absolute inset-0 bg-cover bg-fixed"
+        className="absolute inset-0 bg-cover bg-fixed bg-center"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundPositionY: `-${scrollY * 0.4}px`,
           filter: "brightness(0.7)",
           opacity: 0.4,
-          backgroundPosition: "center",
         }}
       />
       <Container className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">

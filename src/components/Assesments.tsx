@@ -10,14 +10,20 @@ import {
 import Container from "./Container";
 import CustomButton from "./CustomButton";
 import SearchBar from "./SearchBar";
+import { useOnScreen } from "../hooks/useOnScreen";
 
 const Assessments = () => {
+  const [ref, isVisible] = useOnScreen();
+
   return (
     <div
       id="assesments"
       className="min-h-[80vh] flex items-center justify-center"
     >
-      <Container>
+      <Container
+        className={isVisible ? "animate-slideUp" : "opacity-0"}
+        ref={ref}
+      >
         <h2 className="h2 text-center">Assessments</h2>
         <SearchBar placeholder="Type something here" />
         <p className="sm:hidden text-center text-lg text-blue-600">

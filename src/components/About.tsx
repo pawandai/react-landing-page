@@ -2,11 +2,22 @@ import { LiaLinkedin } from "react-icons/lia";
 import Container from "./Container";
 import ProfileCard from "./ProfileCard";
 import { Link } from "react-router-dom";
+import { useOnScreen } from "../hooks/useOnScreen";
 
 const About = () => {
+  const [ref, isVisible] = useOnScreen();
+
   return (
-    <div id="about" className="h-[80vh] flex items-center justify-center">
-      <Container className="items-center justify-center gap-0">
+    <div
+      id="about"
+      className="h-[80vh] flex items-center justify-center"
+      ref={ref}
+    >
+      <Container
+        className={`transition-transform transform items-center justify-center gap-0 ${
+          isVisible ? "animate-slideUp" : "opacity-0"
+        }`}
+      >
         <ProfileCard
           name="Dr. Manpreet"
           role="MBBS"
