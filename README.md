@@ -52,7 +52,7 @@ A modern React-based website built with TypeScript, Tailwind CSS, and Vite, feat
 
 ### `useOnScreen` Hook
 
-- **useOnScreen.ts**: A custom hook that tracks if an element is in the viewport. It's used in the Hero component to create the parallax effect.
+- **useOnScreen.ts**: A custom hook that tracks if an element is in the viewport. It's used for animating different sections.
 
 ## Tailwind CSS
 
@@ -67,4 +67,4 @@ The Tailwind configuration file (`tailwind.config.ts`) has been set up to includ
 
 ## See Live Demo
 
-This project is deployed on Microsoft Azure [Live Demo]().
+This project is deployed on Microsoft Azure [Live Demo](https://react-assignment-tau-mauve.vercel.app/).
