@@ -1,8 +1,8 @@
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Navigation from "../components/Navigation";
-import CustomButton from "../components/CustomButton";
 import About from "../components/About";
+import Assessments from "../components/Assesments";
 
 const HomePage = () => {
   return (
@@ -10,9 +10,7 @@ const HomePage = () => {
       <Hero backgroundImage="/hero.svg" />
       <Navigation />
       <About />
-      <div className="h-screen flex items-center justify-center">
-        <CustomButton>Open Sheet</CustomButton>
-      </div>
+      <Assessments />
       <Footer />
     </div>
   );

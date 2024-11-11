@@ -14,7 +14,7 @@ const ProfileCard: FC<ProfileCardProps> = ({
   quote,
 }) => {
   return (
-    <div className="flex flex-col items-center p-10 max-w-2xl mx-auto rounded-2xl">
+    <div className="flex flex-col items-center px-10 py-5 max-w-2xl mx-auto rounded-2xl">
       {/* Profile Image */}
       <div className="w-32 h-32 rounded-full overflow-hidden shadow-neomorph mb-6">
         <img
@@ -29,7 +29,7 @@ const ProfileCard: FC<ProfileCardProps> = ({
       <p className="text-muted-foreground mb-4">{role}</p>
 
       {/* Quote */}
-      <div className="relative p-6 rounded-xl max-w-lg text-center">
+      <div className="relative px-6 pt-6 rounded-xl max-w-lg text-center">
         <p className="absolute top-1 left-2 text-5xl">“</p>
         <p className="text-lg italic">{quote}</p>
         <p className="absolute bottom-1 right-2 text-5xl">”</p>

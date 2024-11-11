@@ -29,7 +29,7 @@ const Navigation = () => {
   }, [activeLink]);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 sticky top-0 z-50">
+    <nav className="bg-background sticky top-0 z-50 border-b">
       {/* Desktop Navigation */}
       <div
         ref={navRef}

@@ -12,10 +12,10 @@ const LearnMore: FC<LearnMoreProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center mt-10 select-none text-gray-800 dark:text-white animate-bounceSlow ${className}`}
+      className={`flex flex-col items-center mt-10 select-none animate-bounceSlow ${className}`}
     >
       <span className="text-lg font-medium">{label}</span>
-      <FaChevronDown className="mt-2 w-6 h-6 text-gray-800 dark:text-white animate-bounceSlow" />
+      <FaChevronDown className="mt-2 w-6 h-6 animate-bounceSlow" />
     </div>
   );
 };

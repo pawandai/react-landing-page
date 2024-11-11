@@ -81,7 +81,7 @@ export const MobileMenu: FC<MobileMenuProps> = ({
             : "-translate-x-full"
         } ${
           position === "right" ? "right-0" : "left-0"
-        } top-0 bottom-0 w-full sm:w-[360px] bg-white dark:bg-gray-800 transition-transform duration-500 ease-in-out shadow-lg z-20`}
+        } top-0 bottom-0 w-full sm:w-[360px] bg-background transition-transform duration-500 ease-in-out shadow-lg z-20`}
       >
         <div className="p-6">{children}</div>
       </div>
