@@ -15,7 +15,7 @@ interface SheetCloseButtonProps {
 
 export const CloseMenu: FC<SheetCloseButtonProps> = ({ onClose }) => (
   <CustomButton
-    variant="default"
+    variant="outline"
     onClick={onClose}
     className="absolute top-4 right-4"
   >

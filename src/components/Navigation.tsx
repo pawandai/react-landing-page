@@ -1,44 +1,123 @@
-import { FC, useState } from "react";
-import { Link } from "react-scroll";
+import { useState, useEffect, useRef } from "react";
+import { NAV_LINKS } from "../constants";
+import { CloseMenu, MobileMenu } from "./MobileMenu";
+import CustomButton from "./CustomButton";
+import { ExternalLink, Menu } from "lucide-react";
 
-interface NavLink {
-  label: string;
-  to: string;
-}
+const Navigation = () => {
+  const [activeLink, setActiveLink] = useState<string>(NAV_LINKS[0].label);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const navRef = useRef<HTMLDivElement>(null);
 
-const links: NavLink[] = [
-  { label: "Home", to: "home" },
-  { label: "About", to: "about" },
-  { label: "Services", to: "services" },
-  { label: "Portfolio", to: "portfolio" },
-  { label: "Contact", to: "contact" },
-];
+  useEffect(() => {
+    const updateIndicator = () => {
+      const activeItem = document.getElementById(`nav-${activeLink}`);
+      if (activeItem && navRef.current) {
+        const { offsetLeft, offsetWidth } = activeItem;
+        setIndicatorStyle({
+          left: offsetLeft,
+          width: offsetWidth,
+        });
+      }
+    };
 
-const Navigation: FC = () => {
-  const [activeLink, setActiveLink] = useState<string>("");
+    updateIndicator();
+    window.addEventListener("resize", updateIndicator);
+
+    return () => window.removeEventListener("resize", updateIndicator);
+  }, [activeLink]);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900">
-      <div className="container mx-auto px-6 py-4 flex justify-center">
-        {/* Centered Navigation Links */}
-        <div className="space-x-8 flex">
-          {links.map((link) => (
-            <Link
+    <nav className="bg-white dark:bg-gray-900 sticky top-0 z-50">
+      {/* Desktop Navigation */}
+      <div
+        ref={navRef}
+        className="max-w-7xl mx-auto px-6 py-4 flex justify-between relative"
+      >
+        <a
+          href="#home"
+          className="flex md:flex-1"
+          onClick={() => setActiveLink("Home")}
+        >
+          <img src="/logo.svg" alt="Logo" />
+        </a>
+        {/* Links */}
+        <div className="space-x-8 hidden md:flex items-center relative">
+          {NAV_LINKS.map((link) => (
+            <a
+              href={`${!link.target ? "#" : ""}${link.to}`}
+              id={`nav-${link.label}`}
               key={link.label}
-              to={link.to}
-              smooth={true}
-              offset={-70}
-              onSetActive={() => setActiveLink(link.label)}
-              className={`text-lg font-semibold cursor-pointer transition-colors duration-200 
-                          ${
-                            activeLink === link.label
-                              ? "text-blue-500 border-b-2 border-blue-500"
-                              : "text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
-                          }`}
+              target={link.target}
+              onClick={() => {
+                if (!link.target) setActiveLink(link.label);
+                return setIsMenuOpen(false);
+              }}
+              className={`text-lg flex gap-2 font-semibold cursor-pointer transition-colors duration-200 relative 
+                ${
+                  activeLink === link.label
+                    ? "text-blue-500"
+                    : "text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+                }`}
             >
-              {link.label}
-            </Link>
+              {link.label} {link.target && <ExternalLink />}
+            </a>
           ))}
+          {/* Active Link Indicator */}
+          <span
+            className="absolute top-full h-0.5 bg-blue-500 transition-all duration-300"
+            style={{
+              left: `${indicatorStyle.left - 32}px`,
+              width: `${indicatorStyle.width}px`,
+            }}
+          />
+        </div>
+        {/* Mobile Navigation */}
+        <div className="md:hidden">
+          <CustomButton
+            variant="outline"
+            onClick={() => setIsMenuOpen(true)}
+            size="iconOnly"
+          >
+            <Menu />
+          </CustomButton>
+
+          <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+            <CloseMenu onClose={() => setIsMenuOpen(false)} />
+            <a href="#home" className="flex md:flex-1">
+              <img src="/logo.svg" alt="Logo" />
+            </a>
+            <div className="space-y-8 flex flex-col min-h-[80vh] items-center justify-center">
+              {NAV_LINKS.map((link) => (
+                <a
+                  href={`${!link.target ? "#" : ""}${link.to}`}
+                  id={`nav-${link.label}`}
+                  key={link.label}
+                  target={link.target}
+                  onClick={() => {
+                    if (!link.target) setActiveLink(link.label);
+                    return setIsMenuOpen(false);
+                  }}
+                  className={`text-lg flex gap-2 font-semibold cursor-pointer transition-colors duration-200 relative 
+                ${
+                  activeLink === link.label
+                    ? "text-blue-500"
+                    : "text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400"
+                }`}
+                >
+                  {link.label} {link.target && <ExternalLink />}
+                </a>
+              ))}
+            </div>
+            <a
+              className="text-center"
+              href="https://sidlabs.net/"
+              target="_blank"
+            >
+              Powered by Sidlabs
+            </a>
+          </MobileMenu>
         </div>
       </div>
     </nav>
